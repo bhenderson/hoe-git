@@ -77,7 +77,7 @@ class Hoe #:nodoc:
           $changes[code] << line
         end
 
-        puts "=== #{ENV['VERSION'] || 'NEXT'} / #{now}"
+        puts "=== #{ENV['VERSION'] || self.version} / #{now}"
         puts
         changelog_section :major
         changelog_section :minor
