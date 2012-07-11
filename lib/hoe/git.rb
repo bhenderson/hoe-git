@@ -154,12 +154,8 @@ class Hoe #:nodoc:
           collect { |t| t.strip }.
           select  { |t| t =~ %r{^#{prefix}/#{git_release_tag_prefix}} }
       else
-        flags  = "--date-order --simplify-by-decoration --pretty=format:%H"
-        hashes = `git log #{flags}`.split(/\n/).reverse
-        names  = `git name-rev --tags #{hashes.join " "}`.split(/\n/)
-        names  = names.map { |s| s[/tags\/(v.+)/, 1] }.compact
-        names  = names.map { |s| s.sub(/\^0$/, '') }
-        names.select { |t| t =~ %r{^#{git_release_tag_prefix}} }
+        flags  = "--date-order --simplify-by-decoration --pretty=format:%d"
+        `git log #{flags}`.scan(%r{#{git_release_tag_prefix}[^,)]+}).reverse
       end
     end
 
