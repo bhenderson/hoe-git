@@ -154,7 +154,7 @@ class Hoe #:nodoc:
           collect { |t| t.strip }.
           select  { |t| t =~ %r{^#{prefix}/#{git_release_tag_prefix}} }
       else
-        flags  = "--date-order --simplify-by-decoration --pretty=format:%d"
+        flags  = "--date-order --all --simplify-by-decoration --pretty=format:%d"
         `git log #{flags}`.scan(%r{#{git_release_tag_prefix}[^,)]+}).reverse
       end
     end
